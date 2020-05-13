@@ -1,0 +1,42 @@
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+group 'com.coenvk.android.eventbus'
+version '1.0.0'
+description "An implementation in Kotlin of an eventbus."
+
+project.ext {
+    mavGitUrl = 'https://github.com/coenvk/eventbus.git'
+    mavProjectName = 'zycle'
+    mavLibraryLicenses = ["Apache-2.0": 'http://www.apache.org/licenses/LICENSE-2.0.txt']
+    mavLibraryDescription = this.description
+    mavPublishToMavenLocal = true
+    mavSiteUrl = 'https://github.com/coenvk/eventbus'
+}
+
+def properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty('bintray.user')
+    key = properties.getProperty('bintray.apikey')
+    publications = ['Production']
+    configurations = ['archives']
+    override = true
+    pkg {
+        repo = 'maven'
+        name = 'eventbus'
+        description = this.description
+        publicDownloadNumbers = true
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/coenvk/eventbus'
+        version {
+            name = this.version
+            desc = "Version ${this.version}"
+            released = new Date()
+            vcsTag = this.version
+        }
+    }
+}
+
+apply from: 'https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/master/gradle-mavenizer.gradle'
