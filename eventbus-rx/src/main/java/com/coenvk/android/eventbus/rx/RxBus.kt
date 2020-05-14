@@ -24,7 +24,12 @@ class RxBus<E : BusEvent<*>>(
     }
 
     override fun <T : E> unsubscribe(eventType: Class<T>) {
-        subscribers[eventType]?.dispose()
+        subscribers.remove(eventType)?.dispose()
+    }
+
+    override fun unsubscribeAll() {
+        subscribers.forEach { it.value.dispose() }
+        subscribers.clear()
     }
 
     override fun publish(event: E) {

@@ -7,7 +7,7 @@ description "An implementation in Kotlin of an eventbus."
 
 project.ext {
     mavGitUrl = 'https://github.com/coenvk/eventbus.git'
-    mavProjectName = 'eventbus'
+    mavProjectName = 'eventbus-rx'
     mavLibraryLicenses = ["Apache-2.0": 'http://www.apache.org/licenses/LICENSE-2.0.txt']
     mavLibraryDescription = this.description
     mavPublishToMavenLocal = true
@@ -25,7 +25,7 @@ bintray {
     override = true
     pkg {
         repo = 'maven'
-        name = 'eventbus'
+        name = 'eventbus-rx'
         description = this.description
         publicDownloadNumbers = true
         licenses = ['Apache-2.0']
